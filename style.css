@@ -1,0 +1,45 @@
+* { margin: 0; padding: 0; }
+body, .cvs { position: fixed; }
+body {
+    position: fixed;
+    height: 100%;
+}
+
+#controller {
+    position: fixed;
+    z-index: 20;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+}
+#controller #ctrl, .ctrl-sign {
+    z-index: 20;
+    float: left;
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    background: rgba(153, 153, 153, 0.5);
+}
+
+.ctrl-sign {
+    height: 80px;
+    width: 80px;
+    margin-top: 20px;
+    background: rgba(80, 167, 238, 0.5);
+}
+
+#launcher {
+    float: right;
+    margin-top: 35px;
+    margin-right: 20px;
+    border-radius: 50%;
+    background: rgba(255, 57, 57, 0.5);
+    color: white;
+    font-size: 1.3rem;
+    line-height: 70px;
+    text-align: center;
+    height: 70px;
+    width: 70px;
+}

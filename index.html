@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Snake</title>
+    <script src="/snake/lib/basic/resource.js"></script>
+    <script src="/snake/lib/basic/frameServer.js"></script>
+    <script src="/snake/lib/basic/observer.js"></script>
+    <script src="/snake/lib/basic/obclient.js"></script>
+    <script src="/snake/lib/basic/cg.js"></script>
+    <script src="/snake/lib/basic/controller.js"></script>
+    <script src="/snake/lib/service/snake-head.js"></script>
+    <link href="/snake/style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div id="main">
+        <canvas id="cg"></canvas>
+        <div id="controller">
+            <div id="ctrl">
+                <div class="ctrl-sign"></div>
+            </div>
+            <div id="launcher">turbo</div>
+        </div>
+    </div>
+
+    <script>
+    window.store = new Object();
+
+    window.document.body.onload = function(event) {
+        window.resource = new Resource({
+            berry: '/snake/image/berry.png',
+            snakeHead: '/snake/image/snake-head.png'
+        });
+
+        window.resource.load(function() {
+            store.score = 0;
+            store.documentWidth = window.screen.availWidth
+            store.middleX = store.documentWidth / 2;
+            store.documentHeight = window.screen.availHeight;
+            store.middleY = store.documentHeight / 2;
+
+            var cgDom = document.getElementById('cg');
+            var ctrlDom = document.getElementById('ctrl');
+            var launcherDom = document.getElementById('launcher');
+
+            window.store.cg = new CG(cgDom);
+            window.store.observer = new Observer();
+            window.store.snakeHead = new SnakeHead(store.middleX, store.middleY);
+            window.store.controller = new Controller(ctrlDom, launcherDom);
+
+            store.observer.attach(store.snakeHead);
+
+            window.frameServer = new FrameServer(store.observer);
+            frameServer.start();
+        });
+    };
+    </script>
+</body>
+</html>
