@@ -3,6 +3,7 @@ body, .cvs { position: fixed; }
 body {
     position: fixed;
     height: 100%;
+    background: yellow;
 }
 
 #controller {
@@ -11,6 +12,7 @@ body {
     bottom: 0;
     width: 100%;
     height: auto;
+    background: #1a1a1a;
 }
 #controller #ctrl, .ctrl-sign {
     z-index: 20;
@@ -18,21 +20,46 @@ body {
     border-radius: 50%;
     height: 120px;
     width: 120px;
+    margin-top: 20px;
     margin-bottom: 20px;
     margin-left: 20px;
-    background: rgba(153, 153, 153, 0.5);
+    transform:rotate(45deg);
+    -ms-transform:rotate(45deg); 	/* IE 9 */
+    -moz-transform:rotate(45deg); 	/* Firefox */
+    -webkit-transform:rotate(45deg); /* Safari 和 Chrome */
+    -o-transform:rotate(45deg);
 }
 
 .ctrl-sign {
     height: 80px;
     width: 80px;
     margin-top: 20px;
-    background: rgba(80, 167, 238, 0.5);
+}
+#ctrl-top {
+    border-top-left-radius: 100%;
+}
+#ctrl-right {
+    border-top-right-radius: 100%;
+}
+#ctrl-left {
+    border-bottom-left-radius: 100%;
+}
+#ctrl-bottom {
+    border-bottom-right-radius: 100%;
+}
+
+.ctrl-btn {
+    float: left;
+    width: 56px;
+    margin: 1px;
+    height: 60px;
+    border: 1px solid #AAA;
+    background: rgba(255, 254, 173, .5);
 }
 
 #launcher {
     float: right;
-    margin-top: 35px;
+    margin-top: 55px;
     margin-right: 20px;
     border-radius: 50%;
     background: rgba(255, 57, 57, 0.5);

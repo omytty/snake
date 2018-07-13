@@ -12,6 +12,9 @@
     <script src="/snake/lib/basic/cg.js"></script>
     <script src="/snake/lib/basic/controller.js"></script>
     <script src="/snake/lib/service/snake-head.js"></script>
+    <script src="/snake/lib/service/snake-body.js"></script>
+    <script src="/snake/lib/service/berry.js"></script>
+    <script src="/snake/lib/service/berry.service.js"></script>
     <link href="/snake/style.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
@@ -19,7 +22,10 @@
         <canvas id="cg"></canvas>
         <div id="controller">
             <div id="ctrl">
-                <div class="ctrl-sign"></div>
+                <div class="ctrl-btn" id="ctrl-top"></div>
+                <div class="ctrl-btn" id="ctrl-right"></div>
+                <div class="ctrl-btn" id="ctrl-left"></div>
+                <div class="ctrl-btn" id="ctrl-bottom"></div>
             </div>
             <div id="launcher">turbo</div>
         </div>
@@ -31,29 +37,62 @@
     window.document.body.onload = function(event) {
         window.resource = new Resource({
             berry: '/snake/image/berry.png',
-            snakeHead: '/snake/image/snake-head.png'
+            snakeHeadUp: '/snake/image/snake-head-up.png',
+            snakeHeadRight: '/snake/image/snake-head-right.png',
+            snakeHeadLeft: '/snake/image/snake-head-left.png',
+            snakeHeadDown: '/snake/image/snake-head-down.png',
+            snakeBody: '/snake/image/snake-body.png'
         });
 
         window.resource.load(function() {
             store.score = 0;
             store.documentWidth = window.screen.availWidth
             store.middleX = store.documentWidth / 2;
-            store.documentHeight = window.screen.availHeight;
+            store.documentHeight = document.body.clientHeight - 160;
             store.middleY = store.documentHeight / 2;
 
             var cgDom = document.getElementById('cg');
             var ctrlDom = document.getElementById('ctrl');
             var launcherDom = document.getElementById('launcher');
+            var ctrlTopDom = document.getElementById('ctrl-top');
+            var ctrlRightDom = document.getElementById('ctrl-right');
+            var ctrlBottomDom = document.getElementById('ctrl-bottom');
+            var ctrlLeftDom = document.getElementById('ctrl-left');
 
             window.store.cg = new CG(cgDom);
             window.store.observer = new Observer();
             window.store.snakeHead = new SnakeHead(store.middleX, store.middleY);
-            window.store.controller = new Controller(ctrlDom, launcherDom);
+            window.store.controller = new Controller(
+                window.store.snakeHead, ctrlTopDom, ctrlRightDom, ctrlBottomDom, ctrlLeftDom
+            );
+            window.store.berryService = new BerryService();
 
             store.observer.attach(store.snakeHead);
+            store.observer.attach(store.berryService);
 
-            window.frameServer = new FrameServer(store.observer);
+            launcherDom.ontouchstart = function(event) {
+                event.preventDefault();
+                store.snakeHead.setSpeed(150);
+            };
+
+            launcherDom.ontouchend = function(event) {
+                event.preventDefault();
+                store.snakeHead.setSpeed(300);
+            };
+
+            window.frameServer = new FrameServer();
             frameServer.start();
+
+            var stoped = false;
+            cgDom.ontouchstart = function(event) {
+                if (stoped) {
+                    frameServer.start();
+                    stoped = false;
+                } else {
+                    frameServer.stop();
+                    stoped = true;
+                }
+            };
         });
     };
     </script>
