@@ -133,7 +133,6 @@
         var resourceLoader = document.getElementById('loader');
         if (!IsPC()) {
             window.resource.onEachLoaded = function(res) {
-                console.log(1);
                 var len = res.len;
                 var swap = res.loaded / len;
                 resourceLoader.style.width = swap * 100 + '%';
