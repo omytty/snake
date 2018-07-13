@@ -9,6 +9,7 @@
     <script src="/snake/lib/basic/frameServer.js"></script>
     <script src="/snake/lib/basic/observer.js"></script>
     <script src="/snake/lib/basic/obclient.js"></script>
+    <script src="/snake/lib/basic/mixed.js"></script>
     <script src="/snake/lib/basic/cg.js"></script>
     <script src="/snake/lib/basic/controller.js"></script>
     <script src="/snake/lib/service/snake-head.js"></script>
@@ -16,9 +17,39 @@
     <script src="/snake/lib/service/berry.js"></script>
     <script src="/snake/lib/service/berry.service.js"></script>
     <link href="/snake/style.css" type="text/css" rel="stylesheet" />
+
+    <script>
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = [
+                "Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"
+            ];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+    </script>
 </head>
 <body>
     <div id="main">
+
+        <div id="notice">
+            <h3 id="notice-message">游戏资源加载中...</h3>
+            <div id="game-message">
+                <div class="resource-loader"><div id="loader"></div></div>
+            </div>
+            <div id="game-line">
+                <button type="button" id="game-start">开始游戏</button>
+            </div>
+        </div>
+
         <canvas id="cg"></canvas>
         <div id="controller">
             <div id="ctrl">
@@ -44,7 +75,7 @@
             snakeBody: '/snake/image/snake-body.png'
         });
 
-        window.resource.load(function() {
+        var main = function() {
             store.score = 0;
             store.documentWidth = window.screen.availWidth
             store.middleX = store.documentWidth / 2;
@@ -66,6 +97,7 @@
                 window.store.snakeHead, ctrlTopDom, ctrlRightDom, ctrlBottomDom, ctrlLeftDom
             );
             window.store.berryService = new BerryService();
+            window.store.mixed = new Mixed();
 
             store.observer.attach(store.snakeHead);
             store.observer.attach(store.berryService);
@@ -81,7 +113,6 @@
             };
 
             window.frameServer = new FrameServer();
-            frameServer.start();
 
             var stoped = false;
             cgDom.ontouchstart = function(event) {
@@ -93,7 +124,26 @@
                     stoped = true;
                 }
             };
-        });
+
+            window.store.mixed.gameStartHandle(document.getElementById('game-start'));
+            window.store.mixed.initScreen();
+        };
+
+        var gameMessage = document.getElementById('game-message');
+        var resourceLoader = document.getElementById('loader');
+        if (!IsPC()) {
+            window.resource.onEachLoaded = function(res) {
+                console.log(1);
+                var len = res.len;
+                var swap = res.loaded / len;
+                resourceLoader.style.width = swap * 100 + '%';
+            };
+            window.resource.load(main);
+        } else {
+            var noticeMessage = document.getElementById('notice-message');
+            noticeMessage.innerText = '设备类型异常';
+            gameMessage.innerText = '请使用手机打开，或将浏览器调整为手机模式～';
+        }
     };
     </script>
 </body>
