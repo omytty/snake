@@ -49,6 +49,21 @@ body{
     margin-top: -32px;
 }
 
+#triangle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -32px;
+    margin-top: -32px;
+    display:block;
+    width:0;
+    height:0;
+    border-width:28px 0 28px 40px;
+    border-style:solid;
+    border-color:transparent transparent transparent rgb(81, 189, 81);
+    /* box-shadow: rgb(132, 255, 152) 0px 0px 25px 5px; */
+}
+
 #controller {
     position: fixed;
     z-index: 30;
@@ -185,7 +200,7 @@ body{
     color: white;
     background: rgb(83, 209, 104);
     border: 2px solid rgb(100, 221, 120);
-    box-shadow: rgb(132, 255, 152) 0px 0px 25px 5px ;
+    box-shadow: rgb(132, 255, 152) 0px 0px 25px 5px;
     text-align: center;
     padding: 10px;
 }
