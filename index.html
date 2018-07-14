@@ -115,7 +115,7 @@
             cgDom.style.marginLeft = (document.body.clientWidth - store.documentWidth) / 2 + 'px';
 
             var snakeInitX = store.snakeSize * 9;
-            var snakeInitY = store.documentHeight / 2 - store.snakeSize;
+            var snakeInitY = store.documentHeight / 2 - store.snakeSize / 2;
 
             window.store.cg = new CG(cgDom);
             window.store.observer = new Observer();
