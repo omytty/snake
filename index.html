@@ -43,6 +43,9 @@
     </script>
 </head>
 <body>
+    <div id="effect">
+        <h2 id="effect-1"></h2>
+    </div>
     <div id="main">
 
         <div id="start-stop-dom">
@@ -59,7 +62,6 @@
         </div>
 
         <canvas id="cg"></canvas>
-        <canvas id="effect"></canvas>
 
         <div id="controller">
             <div id="ctrl">
@@ -132,18 +134,20 @@
 
             launcherDom.ontouchstart = function(event) {
                 event.preventDefault();
+                this.style.background = 'rgb(255, 57, 57)';
                 store.snakeHead.setSpeed(150);
             };
 
             launcherDom.ontouchend = function(event) {
                 event.preventDefault();
+                this.style.background = 'rgba(255, 57, 57, 0.5)';
                 store.snakeHead.setSpeed(300);
             };
 
             window.frameServer = new FrameServer();
 
             var stoped = false;
-            cgDom.ontouchstart = function(event) {
+            effectDom.ontouchstart = function(event) {
                 if (!stoped) {
                     frameServer.stop();
                     stoped = true;

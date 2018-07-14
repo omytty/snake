@@ -1,5 +1,4 @@
 * { margin: 0; padding: 0; }
-body, .cvs { position: fixed; }
 body{
     position: fixed;
     width: 100%;
@@ -8,16 +7,30 @@ body{
 }
 
 #cg {
+    position: relative;
+    left: 0;
+    top: 0;
     z-index: 30px;
-    background: #1a1a1a;
+    background: #222222;
 }
 
-/* #effect {
-    z-index: 15;
+#effect {
+    z-index: 25;
+    position: fixed;
+    left: 0;
+    top: 0;
     width: 100%;
-    height: 100%;;
-    background: rgb(255, 250, 179);
-} */
+    height: 100%;
+    font-weight: bold;
+    color: rgb(247, 255, 140);
+}
+
+#effect-1 {
+    position: relative;
+    top: 30%;
+    font-size: 2rem;
+    text-align: center;
+}
 
 #start-stop-dom {
     position: fixed;
@@ -38,13 +51,12 @@ body{
 
 #controller {
     position: fixed;
-    z-index: 20;
+    z-index: 30;
     bottom: 0;
     width: 100%;
     height: auto;
 }
 #controller #ctrl, .ctrl-sign {
-    z-index: 20;
     float: left;
     border-radius: 50%;
     height: 120px;
@@ -53,9 +65,9 @@ body{
     margin-bottom: 20px;
     margin-left: 20px;
     transform:rotate(45deg);
-    -ms-transform:rotate(45deg); 	/* IE 9 */
-    -moz-transform:rotate(45deg); 	/* Firefox */
-    -webkit-transform:rotate(45deg); /* Safari 和 Chrome */
+    -ms-transform:rotate(45deg);
+    -moz-transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
     -o-transform:rotate(45deg);
 }
 
@@ -83,7 +95,8 @@ body{
     margin: 1px;
     height: 60px;
     border: 1px solid #AAA;
-    background: rgba(255, 254, 173, .5);
+    background: rgba(255, 254, 216, 0.5);
+    color: rgba(177, 239, 255, 0.5);
 }
 
 #launcher {
@@ -137,7 +150,7 @@ body{
     font-weight: bold;
     line-height: 2rem;
     text-align: center;
-    color: rgb(43, 142, 172);
+    color: rgb(67, 173, 85);
 }
 
 .resource-loader {
@@ -158,8 +171,8 @@ body{
     width: 0;
     border: 0;
     border-radius: 5px;
-    background: rgb(83, 195, 230);
-    box-shadow: rgb(142, 201, 250) 0 0 10px 0;
+    background: rgb(100, 221, 120);
+    box-shadow: rgb(132, 255, 152) 0 0 10px 0;
 }
 
 #game-line {
@@ -170,9 +183,9 @@ body{
     display: none;
     font-size: 1.5rem;
     color: white;
-    background: #1E90FF;
-    border: 2px solid rgb(142, 201, 250);
-    box-shadow: rgb(142, 201, 250) 0px 0px 25px 5px ;
+    background: rgb(83, 209, 104);
+    border: 2px solid rgb(100, 221, 120);
+    box-shadow: rgb(132, 255, 152) 0px 0px 25px 5px ;
     text-align: center;
     padding: 10px;
 }
