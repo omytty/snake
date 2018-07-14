@@ -60,6 +60,12 @@
             <div id="game-line">
                 <button type="button" id="game-start">开始游戏</button>
             </div>
+
+            <div id="game-info">
+                游戏由 O My TTY 制作, 如果你喜欢,请在 
+                <a target="_blank" href="https://github.com/omytty/snake">github</a> 
+                上给我一颗星 :)
+            </div>
         </div>
 
         <canvas id="cg"></canvas>
@@ -77,6 +83,8 @@
 
     <script>
     window.store = new Object();
+
+    window.store.mixed = new Mixed();
 
     window.document.body.onload = function(event) {
         window.resource = new Resource({
@@ -127,7 +135,6 @@
                 window.store.snakeHead, ctrlTopDom, ctrlRightDom, ctrlBottomDom, ctrlLeftDom
             );
             window.store.berryService = new BerryService();
-            window.store.mixed = new Mixed();
             window.store.effectService = new EffectService(effectDom);
 
             store.observer.attach(store.snakeHead);
@@ -145,7 +152,7 @@
                 store.snakeHead.setSpeed(300);
             };
 
-            window.frameServer = new FrameServer();
+            window.frameServer = FrameWorker();
 
             var stoped = false;
             effectDom.ontouchstart = function(event) {
@@ -166,6 +173,12 @@
             window.store.mixed.gameStartHandle(document.getElementById('game-start'));
             window.store.mixed.initScreen();
         };
+
+        store.mixed.restartGame = function() {
+            this.noticeDom.style.display = 'none';
+            window.resource.load(main);
+            window.frameServer.start();
+        }
 
         var gameMessage = document.getElementById('game-message');
         var resourceLoader = document.getElementById('loader');

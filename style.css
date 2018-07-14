@@ -151,8 +151,20 @@ body{
     color: rgb(181, 228, 255);
 }
 
-#game-line a {
+#game-info a {
     color: rgb(67, 134, 179);
+}
+
+#game-info {
+    position: relative;
+    top: 65%;
+    left: 10%;
+    width: 80%;
+    height: auto;
+    font-size: .9rem;
+    line-height: 1.3rem;
+    text-align: center;
+    color: rgb(181, 228, 255);
 }
 
 #game-message {
