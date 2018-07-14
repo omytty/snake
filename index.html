@@ -40,6 +40,9 @@
 <body>
     <div id="main">
 
+        <div id="start-stop-dom">
+            <img class="middle-screen" src="/snake/image/play.png" />
+        </div>
         <div id="notice">
             <h3 id="notice-message">游戏资源加载中...</h3>
             <div id="game-message">
@@ -72,14 +75,14 @@
             snakeHeadRight: '/snake/image/snake-head-right.png',
             snakeHeadLeft: '/snake/image/snake-head-left.png',
             snakeHeadDown: '/snake/image/snake-head-down.png',
-            snakeBody: '/snake/image/snake-body.png'
+            snakeBody: '/snake/image/snake-body.png',
+
+            backAudio: '/snake/image/back.mp3'
         });
 
         var main = function() {
             store.score = 0;
-            store.documentWidth = window.screen.availWidth
             store.middleX = store.documentWidth / 2;
-            store.documentHeight = document.body.clientHeight - 160;
             store.middleY = store.documentHeight / 2;
 
             var cgDom = document.getElementById('cg');
@@ -89,10 +92,23 @@
             var ctrlRightDom = document.getElementById('ctrl-right');
             var ctrlBottomDom = document.getElementById('ctrl-bottom');
             var ctrlLeftDom = document.getElementById('ctrl-left');
+            var startStopDom = document.getElementById('start-stop-dom');
+
+            var docWidth = document.body.clientWidth;
+            var docHeight = document.body.clientHeight - 160;
+            store.xNumber = 20;
+            var snakeSize = docWidth < docHeight ? docWidth / store.xNumber : docHeight / store.xNumber;
+            store.snakeSize = Math.floor(snakeSize);
+            store.documentWidth = store.snakeSize * store.xNumber;
+            store.yNumber = Math.floor(docHeight / store.snakeSize)
+            store.documentHeight = store.yNumber * store.snakeSize;
+
+            var snakeInitX = store.snakeSize * 9;
+            var snakeInitY = store.documentHeight / 2 - store.snakeSize / 2;
 
             window.store.cg = new CG(cgDom);
             window.store.observer = new Observer();
-            window.store.snakeHead = new SnakeHead(store.middleX, store.middleY);
+            window.store.snakeHead = new SnakeHead(snakeInitX, snakeInitY, store.snakeSize);
             window.store.controller = new Controller(
                 window.store.snakeHead, ctrlTopDom, ctrlRightDom, ctrlBottomDom, ctrlLeftDom
             );
@@ -116,12 +132,17 @@
 
             var stoped = false;
             cgDom.ontouchstart = function(event) {
+                if (!stoped) {
+                    frameServer.stop();
+                    stoped = true;
+                    startStopDom.style.display = 'block';
+                }
+            };
+            startStopDom.ontouchstart = function(event) {
                 if (stoped) {
                     frameServer.start();
                     stoped = false;
-                } else {
-                    frameServer.stop();
-                    stoped = true;
+                    startStopDom.style.display = 'none';
                 }
             };
 

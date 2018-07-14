@@ -1,9 +1,34 @@
 * { margin: 0; padding: 0; }
 body, .cvs { position: fixed; }
-body {
+body{
     position: fixed;
+    width: 100%;
     height: 100%;
+    background: #1a1a1a;
+}
+
+#cg {
+    position: relative;
+    top: 0;
+    left: 0;
     background: rgb(255, 250, 179);
+}
+
+#start-stop-dom {
+    position: fixed;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+}
+
+#start-stop-dom .middle-screen {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-left: -32px;
+    margin-top: -32px;
 }
 
 #controller {
