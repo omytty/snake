@@ -4,15 +4,20 @@ body{
     position: fixed;
     width: 100%;
     height: 100%;
-    background: #1a1a1a;
+    background: rgb(81, 189, 81);
 }
 
 #cg {
-    position: relative;
-    top: 0;
-    left: 0;
-    background: rgb(255, 250, 179);
+    z-index: 30px;
+    background: #1a1a1a;
 }
+
+/* #effect {
+    z-index: 15;
+    width: 100%;
+    height: 100%;;
+    background: rgb(255, 250, 179);
+} */
 
 #start-stop-dom {
     position: fixed;
@@ -37,7 +42,6 @@ body{
     bottom: 0;
     width: 100%;
     height: auto;
-    background: #1a1a1a;
 }
 #controller #ctrl, .ctrl-sign {
     z-index: 20;
